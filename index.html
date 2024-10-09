@@ -73,14 +73,12 @@
                 <div class="header-nav">
                     <nav>
                         <ul class="primary-nav">
+                            <li><a href="#map">Location</a></li>
                             <li><a href="#intro">How we met</a></li>
-                            <li><a href="#events">Events</a></li>
-                            <li><a href="#instagram">Instagram</a></li>
+                            <li><a href="#events">Order of Service</a></li>
                             <li><a href="#eng-pics">Engagement</a></li>
-                            <li class="hidden-sm hidden-xs"><a href="#video-bg">Glimpse of the city</a></li>
                         </ul>
                         <ul class="member-actions">
-                            <li><a href="#map" class="login">Venue</a></li>
                             <li><a href="#rsvp" class="btn-white btn-small">RSVP</a></li>
                         </ul>
                     </nav>
@@ -108,6 +106,47 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <h3>We are getting Married!</h3>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="video-bg" class="hidden-xs">
+    <div id="bgndVideo" class="player"
+         data-property="{videoURL:'https://youtu.be/rcWqBSlXJSY?si=tcAMMh0khk2bNxJ4',containment:'#video-bg',autoPlay:true, mute:true, showControls:false, startAt:0, stopAt:79, opacity:1}">
+    </div>
+    <div id="video-content">
+        <h5>The Engine Works</h5>
+        <p>Glasgow</p>
+    </div>
+</section>
+
+<section id="map" class="section-padding">
+    <div class="text-center">
+        <h3>Where is the venue?</h3>
+    </div>
+    <div id="map-canvas"></div>
+    <div id="map-content-wrapper" class="container pointer-events-none">
+        <div class="row">
+            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
+                <div class="text-center">
+                    <div id="btn-show-content" class="toggle-map-content pointer-events-auto">
+                        <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Show info
+                    </div>
+                </div>
+                <div id="map-content" class="pointer-events-auto">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h5>The Engine Works</h5>
+                            <p>23-25 Lochburn Rd, Glasgow G20 9AE</p>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12" style="padding: 5px;">
+                            <a class="btn btn-accent btn-small" id="btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Show
+                                map</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -140,27 +179,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="header">Events</h3>
+                <h3 class="header">Order of Service</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="wp3">
-                    <p><strong>27th November</strong></p>
-
-                    <h5>Mehndi <span class="time">1PM - 5PM</span></h5>
-                    <p>It's one of the oldest traditional Indian pre wedding ceremony where the bride and groom
-                        attend the event together and a professional mehndi artist applies
-                        mehndi to the bride's hands and feet. This will be having a celebratory
-                        festival feel to it with people wearing vibrant clothes and dancing, singing, playing
-                        games and a lot more.</p>
+                    <h5>Arrival Drinks<span class="time">12:30PM - 1:30PM</span></h5>
                 </div>
                 <div class="wp5">
-                    <h5>Cocktail Night <span class="time">7PM - 12AM</span></h5>
-                    <p>This event is no way close to ethnic. The bride & groom would like to have some "shots before the
-                        knot". With booze flowing down the floor and the western attire on, everyone would be busy
-                        showing off their new moves on the stage which they have finely honed. Lastly, expect some beer
-                        pong matches & karaoke for sure.</p>
+                    <h5>Ceremony<span class="time">1:30PM - 2:30PM</span></h5>
+                </div>
+                <div class="wp5">
+                    <h5>Blashfhef<span class="time">2:30PM - 3:30PM</span></h5>
+                </div>
+                <div class="wp5">
+                    <h5>fqefq<span class="time">3:30PM - 4:30PM</span></h5>
                 </div>
             </div>
         </div>
@@ -221,24 +255,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-</section>
-
-<section id="instagram" class="section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h3>A picture is worth a thousand words!</h3>
-                <p>Help us capture the moment, tag your photos with the hashtag
-                    <a href="https://instagram.com/explore/tags/bullimack/" target="_blank">#BulliMack</a>
-                </p>
-            </div>
-        </div>
-        <div class="row section-border wp7">
-            <div class="col-md-4 col-md-offset-4">
-                <img src="img/iphone_instagram.jpg">
-            </div>
-        </div>
-    </div>
 </section>
 
 <section id="eng-pics" class="section-padding">
@@ -316,47 +332,7 @@
     </div>-->
 </section>
 
-<section id="video-bg" class="hidden-sm hidden-xs">
-    <div id="bgndVideo" class="player"
-         data-property="{videoURL:'https://youtu.be/rcWqBSlXJSY?si=tcAMMh0khk2bNxJ4',containment:'#video-bg',autoPlay:true, mute:true, showControls:false, startAt:0, stopAt:79, opacity:1}">
-    </div>
-    <div id="video-content">
-        <h5>The Engine Works</h5>
-        <p>Glasgow</p>
-    </div>
-</section>
 
-<section id="map" class="section-padding">
-    <div class="text-center">
-        <h3>Where is the venue?</h3>
-    </div>
-    <div id="map-canvas"></div>
-    <div id="map-content-wrapper" class="container pointer-events-none">
-        <div class="row">
-            <div class="col-xs-offset-1 col-xs-10 col-md-offset-3 col-md-6">
-                <div class="text-center">
-                    <div id="btn-show-content" class="toggle-map-content pointer-events-auto">
-                        <i class="fa fa-info-circle"></i>&nbsp;&nbsp; Show info
-                    </div>
-                </div>
-                <div id="map-content" class="pointer-events-auto">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h5>The Engine Works</h5>
-                            <p>23-25 Lochburn Rd, Glasgow G20 9AE</p>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <div class="col-md-12" style="padding: 5px;">
-                            <a class="btn btn-accent btn-small" id="btn-show-map"><i class="fa fa-map-marker"></i>&nbsp;&nbsp;Show
-                                map</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 <section class="rsvp text-center" id="rsvp">
 
@@ -380,7 +356,7 @@
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <h3>What are you waiting for?</h3>
-                <p>We would greatly appreciate if you could RSVP before 1st of November '17</p>
+                <p>We would greatly appreciate if you could RSVP before 1st of April 2025</p>
                 <form id="rsvp-form" class="rsvp-form"
                       action=""
                       method="POST">
@@ -436,7 +412,9 @@
         <div class="row">
             <div class="col-sm-12 text-center content">
                 <span class="to-top-wrapper"><a href="#top" class="to-top"><i class="fa fa-angle-up"></i></a></span>
-                <p>Crafted by that.ben.guy with <span class="fa fa-heart pulse2"></span> for Lucy</p>
+                <p>Crafted by 
+                    <a href="https://github.com/thatbenguy" target="_blank">that.ben.guy</a>
+                     with <span class="fa fa-heart pulse2"></span> for Lucy</p>
             </div>
         </div>
     </div>

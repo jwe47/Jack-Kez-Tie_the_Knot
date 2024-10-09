@@ -252,7 +252,9 @@ Hero
 ========================================================================== */
 .hero {
   min-height: 750px;
-  background: url('../img/hero-min.jpg') center center;
+  background: url('../img/Grey-removebg.png') center top no-repeat;
+  background-size: 140px auto;
+  background-color: #e65f00;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -278,11 +280,11 @@ Hero
     margin-bottom: 80px;
   }
   .hero-content {
-    padding-top: 40%;
+    padding-top: 20%;
   }
   .hero-content img {
-    width: 55%;
-    margin-bottom: 12%;
+    width: 70%;
+    margin-bottom: 25%;
   }
 }
 .navigation {
@@ -293,7 +295,7 @@ Hero
 }
 .fixed {
   position: fixed;
-  background-color: rgba(55, 36, 40, .88);
+  background-color: rgba(230, 95, 0, 0.88);
   z-index: 999;
   width: 100%;
 }
@@ -318,7 +320,7 @@ header {
     display: inline-block;
   }
   .logo img {
-    height: 19px;
+    height: 38px;
   }
   ul.primary-nav {
     margin: 0 0 0 75px;
@@ -641,15 +643,6 @@ Features-stack
   }
   figcaption a.blog-post-title:hover, figcaption a.blog-post-title:focus {
     color: $txt-secondary;
-  }
-}
-
-/* ==========================================================================
-Instagram
-========================================================================== */
-#instagram {
-  img {
-    width: 100%;
   }
 }
 

@@ -1,7 +1,48 @@
+@media screen and (min-width: 2000px) {
+    .hero {
+        min-height: 750px;
+        background: url('../img/Grey-removebg-big.png') center top no-repeat;
+        background-size: 140px auto;
+        background-color: #e65f00;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        position: relative;
+    }
+
+    .hero .hero-content {
+        padding-bottom: 30%;
+    }
+}
+
+@media screen and (min-width: 1550px) and (max-width: 1999px) {
+    .hero {
+        min-height: 750px;
+        background: url('../img/Grey-removebg-med.png') center top no-repeat;
+        background-size: 140px auto;
+        background-color: #e65f00;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        position: relative;
+    }
+
+    .hero .hero-content {
+        padding-bottom: 30%;
+    }
+
+}
+
 @media screen and (max-width: 1200px) {
     header {
         width: 90%;
         margin: 0 auto;
+    }
+    
+    .hero .hero-content {
+        padding-top: 80%;
     }
 
     .intro-content {
@@ -13,7 +54,7 @@
 
 @media screen and (max-width: 1024px) {
     .hero .hero-content {
-        padding-top: 50%;
+        padding-top: 80%;
     }
 }
 
@@ -22,10 +63,6 @@
     header {
         width: 90%;
         padding-left: 25px;
-    }
-
-    .hero .hero-content {
-        padding-top: 50%;
     }
 
     .header-nav {
@@ -230,15 +267,6 @@
         border-radius: 0;
     }
 
-    #map-content-wrapper {
-        margin-bottom: 40px;
-    }
-    
-    #map-content {
-        margin-top: 0;
-        padding: 35px;
-    }
-
     .rsvp {
         padding-top: 40px;
     }
@@ -251,10 +279,14 @@
         margin: 120px 0 120px 0;
     }
 }
-
+@media screen and (max-width: 800px) {
+    .hero .hero-content {
+        padding-top: 70%;
+    }
+}
 @media screen and (max-width: 640px) {
     .hero .hero-content {
-        padding-top: 100%;
+        padding-top: 70%;
     }
 
     #eng-pics .img-wrap i {
@@ -263,10 +295,21 @@
         width: 25px;
         height: 25px;
         top: 10px;
-        right: 10px; }
+        right: 10px; 
+    }
 
     #map-content-wrapper {
-        margin-bottom: 0;
+        position: relative;
+        margin-top: -502px;
+        margin-bottom: 150px
+    }
+    
+    #map-content {
+        margin-top: 40px;
+        padding: 50px 60px;
+        background: #fff;
+        -webkit-transition: opacity .5s,visibility .6s,margin-top .5s;
+        transition: opacity .5s,visibility .6s,margin-top .5s
     }
     
     footer ul.footer-group {
@@ -293,11 +336,11 @@
 
 @media screen and (max-width: 480px) {
     .hero .hero-content {
-        padding-top: 110%;
+        padding-top: 80%;
     }
     
     .hero .hero-content img {
-        width: 65%;
+        width: 80%;
     }
 
     .hero .btn {
