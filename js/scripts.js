@@ -214,7 +214,7 @@ $(document).ready(function () {
 
     //     $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
 
-    //     if ($('#invite_code').val() !== '12345') {
+    //     if ($('#invite_code').val() !== '42069') {
     //         $('#alert-wrapper').html(alert_markup('danger', '<strong>Sory!</strong> Your invite code is incorrect.'));
     //     } else {
     //         $.post('https://script.google.com/macros/s/AKfycbzvimUNMsqDizvLx46y45Xqjzlm2NNf3KSmSJCgN4gk6JuVdLYyNXaXaf9vT9VN-lTv/exec', data)
@@ -240,7 +240,7 @@ $(document).ready(function () {
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Checking your details.'));
         
         // Validate the invite code
-        if ($('#inviteCode').val() !== '12345') {
+        if ($('#inviteCode').val() !== '42069') {
             $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
             return;
         }
@@ -251,7 +251,7 @@ $(document).ready(function () {
         };
     
         // Send the POST request to the Google Apps Script Web App URL
-        $.post('https://script.google.com/macros/s/AKfycbx6d08sMTuXdPDPbNLFGeZy6VY2u2up2DbKAlAkjNXH_9DC0qvZnRtlYeUJdRwNQ6WFUg/exec', getGuestJSON)
+        $.post('https://script.google.com/macros/s/AKfycbw_bMtvbjAo-s7rf-ZVaU8LntfA_0yGxiTJPiiFSCJO8X27zC6R4Aj9NPfZnunm2FpYmg/exec', getGuestJSON)
         .done(function (response) {
             if (response.result === "error" && response.message === "Guest not found") {
                 $('#alert-wrapper').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
@@ -300,7 +300,7 @@ $(document).ready(function () {
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
         
         // Save the RSVP details
-        $.post('https://script.google.com/macros/s/AKfycbx6d08sMTuXdPDPbNLFGeZy6VY2u2up2DbKAlAkjNXH_9DC0qvZnRtlYeUJdRwNQ6WFUg/exec', {
+        $.post('https://script.google.com/macros/s/AKfycbw_bMtvbjAo-s7rf-ZVaU8LntfA_0yGxiTJPiiFSCJO8X27zC6R4Aj9NPfZnunm2FpYmg/exec', {
             action: 'saveRSVP',
             ...rsvpObject  // Use the object to spread the data
         })
