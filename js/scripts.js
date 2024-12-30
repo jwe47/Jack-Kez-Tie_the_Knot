@@ -251,7 +251,7 @@ $(document).ready(function () {
         };
     
         // Send the POST request to the Google Apps Script Web App URL
-        $.post('https://script.google.com/macros/s/AKfycbw_bMtvbjAo-s7rf-ZVaU8LntfA_0yGxiTJPiiFSCJO8X27zC6R4Aj9NPfZnunm2FpYmg/exec', getGuestJSON)
+        $.post('https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec', getGuestJSON)
         .done(function (response) {
             if (response.result === "error" && response.message === "Guest not found") {
                 $('#alert-wrapper').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
@@ -300,7 +300,7 @@ $(document).ready(function () {
         $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
         
         // Save the RSVP details
-        $.post('https://script.google.com/macros/s/AKfycbw_bMtvbjAo-s7rf-ZVaU8LntfA_0yGxiTJPiiFSCJO8X27zC6R4Aj9NPfZnunm2FpYmg/exec', {
+        $.post('https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec', {
             action: 'saveRSVP',
             ...rsvpObject  // Use the object to spread the data
         })
