@@ -156,14 +156,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h3 class="header">How we met</h3>
+                <h3 class="header">Our Story</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-md-3 hidden-sm hidden-xs"><img src="img/IMG_2317.jpg" class="wp1"></div>
             <div class="col-md-6">
                 <p>
-                    Tinder; Ben's bio said "I'm Scottish so I think I am funny" Lucy agreed to a date blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+                    Our love story kicked off in January 2018, thanks to Tinder. Lucy, being the more organised of the two, messaged Ben first (If I had waited for him, we'd probably still be single). Bonding over memes and The Chase, we quickly realized we had something special: a shared sense of humour and a mutual appreciation for useless trivia.
+                    <br><br>
+                    Our first date in Leeds confirmed it—we didn’t find each other annoying, so we figured we’d keep hanging out. By the end of 2018, we took the plunge and moved in together. Spoiler: we still didn’t annoy each other (much).
+                    <br><br>
+                    In 2021, we levelled up and moved to Glasgow, and by March 2023, Ben decided it was time to pop the question. In true BulliMack fashion, things didn’t exactly go as planned. Picture this: drunk leprechauns, a pitch-dark canal, and a car crashing into a wall at a leisurely 5 mph. Confused? So were we. Despite this Ben got down on one knee (after an intense cardio session up 5 flights of stairs to the Air BnB), Lucy breathlessly said yes (insert joke about Ben taking Lucy's breath away etc) and here we are today welcoming you to our special day.
                 </p>
             </div>
             <div class="col-md-3 hidden-sm hidden-xs"><img src="img/DSD_0214.jpg" class="wp2"></div>
@@ -335,72 +339,152 @@
 
 
 <section class="rsvp text-center" id="rsvp">
-
-    <div id="rsvp-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span>
-                    </button>
-                    <div class="section-padding">
-                        <h3>Thank you!</h3>
-                        <p>We are glad to see you join us on our big day.</p>
-                        <div id="add-to-cal"></div>
-                    </div>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
                 <h3>What are you waiting for?</h3>
                 <p>We would greatly appreciate if you could RSVP before 1st of April 2025</p>
-                <form id="rsvp-form" class="rsvp-form"
-                      action=""
-                      method="POST">
+                
+                <!-- Main RSVP Form -->
+                <form id="rsvp-form" class="rsvp-form" action="" method="POST">
+                    <!-- Guest Name -->
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-12 col-sm-12">
                             <div class="form-input-group">
-                                <i class="fa fa-envelope"></i><input type="email" name="email" class=""
-                                                                     placeholder="Your email"
-                                                                     required>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-input-group">
-                                <i class="fa fa-user"></i><input name="name" class=""
-                                                                 placeholder="Your name"
-                                                                 required>
+                                <i class="fa fa-user"></i>
+                                <input name="guestName" class="" id="guestName" placeholder="Your full name" required>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Invite Code -->
                     <div class="row">
-                        <div class="col-md-6 col-sm-6">
+                        <div class="col-md-12 col-sm-12">
                             <div class="form-input-group">
-                                <i class="fa fa-users"></i><input type="number" name="extras" class="" min="0"
-                                                                  max="4"
-                                                                  placeholder="Husband/Wife or kids"
-                                                                  required>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-input-group">
-                                <i class="fa fa-key"></i><input type="number" name="invite_code" id="invite_code"
-                                                                class="" min="0"
-                                                                placeholder="Invite code"
-                                                                required>
+                                <i class="fa fa-key"></i>
+                                <input type="number" name="inviteCode" id="inviteCode" class="" min="0" placeholder="Invite code" required>
                             </div>
                         </div>
                     </div>
+                    
+                    <!-- Alert Section -->
                     <div class="row">
                         <div class="col-md-12" id="alert-wrapper"></div>
                     </div>
-                    <button class="btn-fill rsvp-btn" disabled>
-                        Yes,
-                        that's me!
+                    
+                    <!-- Submit Button -->
+                    <button class="btn-fill rsvp-btn">
+                        Submit
                     </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Plus One Section (Initially Hidden) -->
+    <div id="plusOneSection" style="display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-md-offset-3">
+                    <h4>Plus One Details</h4>
+                    
+                    <!-- Plus One Name (Pre-filled if exists) -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-input-group">
+                                <i class="fa fa-user"></i>
+                                <input type="text" name="plusOneName" id="plusOneName" placeholder="Plus one name" readonly>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RSVP Modal for Guest and Plus One Attendance, Dietary Preferences, and Drinks -->
+    <div class="modal fade" id="rsvp-modal" tabindex="-1" role="dialog" aria-labelledby="RSVPModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="final-rsvp-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="RSVPModalLabel">RSVP Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                    <div class="modal-body">
+                        <!-- Guest Details -->
+                         
+                        <div class="form-group">
+                            <input type="hidden" name="guestName" class="form-control" id="hiddenGuestName">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Will you be attending?</label>
+                            <select name="guestAttendance" class="form-control" required>
+                                <option value="" disabled selected>Select your answer</option>
+                                <option value="yes">Yes</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Any dietary requirements?</label>
+                            <input type="text" name="guestDiet" class="form-control" placeholder="E.g., vegetarian, allergies">
+                        </div>
+                        
+                        <!-- Guest Drink Preference -->
+                        <div class="form-group">
+                            <label>Drink preference on your table:</label>
+                            <select name="guestDrink" class="form-control" required>
+                                <option value="" disabled selected>Select your preference</option>
+                                <option value="red wine">Red Wine</option>
+                                <option value="white wine">White Wine</option>
+                                <option value="beer">Beer</option>
+                            </select>
+                        </div>
+                    
+                        <!-- Plus One Section (conditionally shown) -->
+                        <div id="plusOneDetails" style="display:none;">
+                            <hr>
+                            <h5><span id="plusOneNameDisplay"></span>'s Details</h5>
+                            
+                            <div class="form-group">
+                                <input type="hidden" name="plusName" class="form-control" id="hiddenPlusOneFullName">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Will <span class="plusOneNameDisplay"></span> be attending?</label>
+                                <select name="plusAttendance" class="form-control">
+                                    <option value="" disabled selected>Select your answer</option>
+                                    <option value="yes">Yes</option>
+                                    <option value="no">No</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Does <span class="plusOneNameDisplay"></span> have any dietary requirements?</label>
+                                <input type="text" name="plusDiet" class="form-control" placeholder="E.g., vegetarian, allergies">
+                            </div>
+                            
+                            <!-- Plus One Drink Preference -->
+                            <div class="form-group">
+                                <label><span class="plusOneNameDisplay"></span>'s drink preference for the table:</label>
+                                <select name="plusDrink" class="form-control">
+                                    <option value="" disabled selected>Select preference</option>
+                                    <option value="red wine">Red Wine</option>
+                                    <option value="white wine">White Wine</option>
+                                    <option value="beer">Beer</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit RSVP</button>
+                    </div>
                 </form>
             </div>
         </div>

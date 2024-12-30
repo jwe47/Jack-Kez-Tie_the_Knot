@@ -289,13 +289,13 @@ Hero
 }
 .navigation {
   transition: all 300ms ease-in-out;
+  background-color: rgba(230, 95, 0);
   position: fixed;
   width: 100%;
   z-index: 999;
 }
 .fixed {
   position: fixed;
-  background-color: rgba(230, 95, 0, 0.88);
   z-index: 999;
   width: 100%;
 }
@@ -334,7 +334,7 @@ header {
         padding-right: 25px;
 
         &:hover {
-          color: $accent-color;
+          color: $accent-color-hover;
         }
       }
       &:last-child a {
@@ -350,7 +350,7 @@ header {
         color: $txt-light;
 
         &:hover {
-          color: $accent-color;
+          color: $accent-color-hover;
         }
       }
     }

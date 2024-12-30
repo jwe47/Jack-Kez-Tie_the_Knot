@@ -208,32 +208,125 @@ $(document).ready(function () {
 
 
     /********************** RSVP **********************/
+    // $('#rsvp-forme').on('submit', function (e) {
+    //     e.preventDefault();
+    //     var data = $(this).serialize();
+
+    //     $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+
+    //     if ($('#invite_code').val() !== '12345') {
+    //         $('#alert-wrapper').html(alert_markup('danger', '<strong>Sory!</strong> Your invite code is incorrect.'));
+    //     } else {
+    //         $.post('https://script.google.com/macros/s/AKfycbzvimUNMsqDizvLx46y45Xqjzlm2NNf3KSmSJCgN4gk6JuVdLYyNXaXaf9vT9VN-lTv/exec', data)
+    //             .done(function (data) {
+    //                 console.log(data);
+    //                 if (data.result === "error") {
+    //                     $('#alert-wrapper').html(alert_markup('danger', data.message));
+    //                 } else {
+    //                     $('#alert-wrapper').html('');
+    //                     $('#rsvp-modal').modal('show');
+    //                 }
+    //             })
+    //             .fail(function (data) {
+    //                 console.log(data);
+    //                 $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+    //             });
+    //     }
+    // });
+
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
-        var data = $(this).serialize();
-
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
-
-        if ($('#invite_code').val() !== '12345') {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sory!</strong> Your invite code is incorrect.'));
-        } else {
-            $.post('https://script.google.com/macros/s/AKfycbzvimUNMsqDizvLx46y45Xqjzlm2NNf3KSmSJCgN4gk6JuVdLYyNXaXaf9vT9VN-lTv/exec', data)
-                .done(function (data) {
-                    console.log(data);
-                    if (data.result === "error") {
-                        $('#alert-wrapper').html(alert_markup('danger', data.message));
-                    } else {
-                        $('#alert-wrapper').html('');
-                        $('#rsvp-modal').modal('show');
-                    }
-                })
-                .fail(function (data) {
-                    console.log(data);
-                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
-                });
+        
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Checking your details.'));
+        
+        // Validate the invite code
+        if ($('#inviteCode').val() !== '12345') {
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+            return;
         }
-    });
+        let getGuestJSON =  {
+            action: "getGuestDetails",
+            guestName: $('#guestName').val(),
+            invite_code: $('#inviteCode').val()
+        };
+    
+        // Send the POST request to the Google Apps Script Web App URL
+        $.post('https://script.google.com/macros/s/AKfycbx6d08sMTuXdPDPbNLFGeZy6VY2u2up2DbKAlAkjNXH_9DC0qvZnRtlYeUJdRwNQ6WFUg/exec', getGuestJSON)
+        .done(function (response) {
+            if (response.result === "error" && response.message === "Guest not found") {
+                $('#alert-wrapper').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
+            } else if (response.result === "error") {
+                // Handle other errors (like incorrect invite code)
+                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> ' + response.message));
+            } else {
+                console.log(response);
+                console.log(response.hasPlusOne);
+                var guestName = response.guestName;
+                $('#hiddenGuestName').val(guestName);
 
+                // Handle plus-one section display based on the response
+                if (response.hasPlusOne) {
+                    $('#plusOneDetails').show();
+                    $('#plusOneNameDisplay').text(response.plusOneName || 'your plus one');
+                    $('.plusOneNameDisplay').text(response.plusOneName || 'your plus one');
+                    var plusOneFullName = response.plusOneFullName || 'plus one';
+                    $('#hiddenPlusOneFullName').val(plusOneFullName);
+                } else {
+                    $('#plusOneDetails').hide();
+                }
+    
+                // Show the modal for the next step of RSVP (attendance, dietary, drinks)
+                $('#rsvp-modal').modal('show');
+            }
+        })
+        .fail(function () {
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There was an issue checking your details. Please reach out to Ben or Lucy.'));
+        });
+    });
+    
+    
+    // Handle final RSVP submission within the modal
+    $('#final-rsvp-form').on('submit', function (e) {
+        e.preventDefault();
+        
+        var rsvpData = $(this).serializeArray();  // Serialize the form data into an array of key/value pairs
+        var rsvpObject = {}; // Empty object to store form data
+    
+        // Convert serialized array into an object
+        rsvpData.forEach(function (field) {
+            rsvpObject[field.name] = field.value;
+        });
+        
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
+        
+        // Save the RSVP details
+        $.post('https://script.google.com/macros/s/AKfycbx6d08sMTuXdPDPbNLFGeZy6VY2u2up2DbKAlAkjNXH_9DC0qvZnRtlYeUJdRwNQ6WFUg/exec', {
+            action: 'saveRSVP',
+            ...rsvpObject  // Use the object to spread the data
+        })
+        .done(function (response) {
+            if (response.result === "error") {
+                $('#alert-wrapper').html(alert_markup('danger', response.message));
+            } else {
+                $('#alert-wrapper').html(alert_markup('success', '<strong>Thank you!</strong> Your RSVP has been saved.'));
+                $('#rsvp-modal').modal('hide');  // Hide the RSVP modal after successful submission
+                
+                // Show the "Thank you" message
+                $('#rsvp-modal .modal-body').html(`
+                    <div class="section-padding">
+                        <h3>Thank you!</h3>
+                        <p>We cannot wait to see you on our big day.</p>
+                    </div>
+                `);
+                $('#rsvp-modal').modal('show');  // Reopen the modal to show the final message
+            }
+        })
+        .fail(function () {
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There was an issue saving your RSVP. Please reach out to Ben or Lucy.'));
+        });
+    });
+    
+    
 });
 
 /********************** Extras **********************/

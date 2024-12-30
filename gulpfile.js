@@ -2,7 +2,7 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass')(require('sass'));
-var uglify = require('gulp-uglify');
+var terser = require('gulp-terser');  // Replacing uglify with terser
 var rename = require('gulp-rename');
 
 // compile scss to css
@@ -15,13 +15,13 @@ gulp.task('sass', function () {
 
 // watch changes in scss files and run sass task
 gulp.task('sass:watch', function () {
-    gulp.watch('./sass/**/*.scss', ['sass']);
+    gulp.watch('./sass/**/*.scss', gulp.series('sass'));
 });
 
-// minify js
+// minify js with terser
 gulp.task('minify-js', function () {
     return gulp.src('./js/scripts.js')
-        .pipe(uglify())
+        .pipe(terser())  // Using terser for ES6+ compatibility
         .pipe(rename({basename: 'scripts.min'}))
         .pipe(gulp.dest('./js'));
 });
