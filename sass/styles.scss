@@ -12,6 +12,10 @@
 /* ==========================================================================
 Global Styles
 ========================================================================== */
+input, textarea, select {
+  font-size: 16px; /* Prevent zooming on mobile devices */
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+}
 .group:after {
   content: "";
   display: table;
@@ -67,7 +71,7 @@ section .header {
   z-index: 1070;
   display: block;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.4;
   visibility: visible;
@@ -554,16 +558,25 @@ Features-stack
 .events
 ========================================================================== */
 .events {
-  .leftcol {
-    padding-right: 100px;
-    border-right: solid 1px $keyline-color;
+  .wp5 {
+    display: flex; /* Enable flexbox for alignment */
+    justify-content: space-between; /* Push content to opposite sides */
+    align-items: center; /* Align items vertically */
+    width: 100%; /* Ensure full-width alignment */
+    max-width: 600px; /* Optional: Limit the width for better readability */
+    margin: 10px auto; /* Center and add spacing */
   }
-  .rightcol {
-    padding-left: 100px;
+  h5 {
+    font-size: 18px;
+    margin: 0; /* Remove unnecessary margins */
+    flex: 1; /* Allow the text to take available space */
+    text-align: left; /* Align the main text to the left */
   }
-
   .time {
-    font-size: 13px;
+    text-align: right;
+    flex: 0;
+    font-size: 16px;
+    min-width: 60px;
     font-style: italic;
     text-transform: lowercase;
     color: $txt-primary;
@@ -719,12 +732,45 @@ Engagement Pics
 Embed video
 ========================================================================== */
 #video-bg {
-  height: 300px;
+  display: flex; /* Enable flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Hidden by opacity */
+  height: 0;
+  overflow: hidden; /* Prevent overflow issues */
+  transition: visibility 0s, opacity 0.3s ease, height 0.3s ease;
+  position: relative; /* Ensure relative positioning */
 }
+
+#video-bg.visible {
+  visibility: visible; /* Make it visible */
+  opacity: 1; /* Fade it in */
+  height: auto; /* Adjust as needed */
+}
+
+#bgndVideo {
+  position: absolute; /* Absolute positioning */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Adjust to center properly */
+  width: 100%; /* Scale the width to fit */
+  height: 100%; /* Scale the height to fit */
+  object-fit: cover; /* Ensures proper scaling */
+}
+
+#bgndVideo iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the video fills the container */
+  border: none; /* Removes any borders */
+}
+
 #video-content {
   width: 100%;
   height: 100%;
   padding-top: 100px;
+  padding-bottom: 100px;
   position: relative;
   background: rgba(17, 17, 17, 0.5);
   text-align: center;
@@ -781,13 +827,13 @@ Google map
 RSVP form
 ========================================================================== */
 .rsvp {
-  padding-bottom: 140px;
+  padding-bottom: 40px;
   .rsvp-form {
     .rsvp-btn {
       padding: 15px 0;
       border-radius: 3px;
       width: 100%;
-      font-size: 13px;
+      font-size: 16px;
     }
     .form-input-group {
       width: 100%;
@@ -815,7 +861,7 @@ RSVP form
         transform: translateY(-50%);
       }
       i.fa-user, i.fa-users, i.fa-envelope, .fa-key {
-        font-size: 14px;
+        font-size: 16px;
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -829,6 +875,14 @@ RSVP form
         -webkit-border-radius: 6px;
         border-radius: 6px;
         border: none;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield; // Firefox
+      }
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;   // Chrome, Safari, Edge
+        margin: 0;
       }
       input::-webkit-input-placeholder {
         color: $form-placeholder;
@@ -845,6 +899,144 @@ RSVP form
     }
   }
 }
+
+/* ==========================================================================
+RSVP Pop-up
+========================================================================== */
+/* RSVP Modal Styling */
+#rsvp-modal {
+  .modal-dialog {
+    margin: 0 auto; /* Center horizontally */
+    max-width: 500px; /* Set a reasonable maximum width */
+    width: 90%; /* Adjust for smaller screens */
+    border: none;
+  }
+
+  .modal-content {
+    background-color: #fff; /* Match your page's background */
+    border-radius: 8px; /* Smooth rounded corners */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for elevation */
+    padding: 15px; /* Reduced padding */
+    border: 1px solid #e5e5e5; /* Optional: a subtle border for contrast */
+  }
+
+  .modal-header {
+    position: relative; /* Ensure proper positioning context */
+    padding: 10px 15px; /* Reduced header padding */
+    background-color: #e65f00; /* Match the accent color of your page */
+    color: #fff; /* White text for contrast */
+    text-align: center;
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
+    border-bottom: none; /* Remove default border */
+
+    .modal-title {
+      font-size: 20px; /* Slightly larger font */
+      font-weight: 600; /* Bold for emphasis */
+    }
+
+    .close {
+      position: absolute; /* Absolute position inside the header */
+      top: 50%; /* Align vertically */
+      right: 20px; /* Adjust distance from the right */
+      transform: translateY(-50%); /* Center vertically */
+      color: #fff; /* White close button */
+      opacity: 1;
+      font-size: 24px; /* Larger size for better visibility */
+      text-shadow: none; /* Remove shadow */
+    }
+  }
+
+  .modal-body {
+    padding: 15px; /* Reduced padding */
+    color: #333; /* Dark text for readability */
+    font-size: 16px; /* Standard font size */
+    line-height: 1.5; /* Improve readability */
+
+    input, select, textarea {
+      display: block;
+      width: 100%;
+      height: 42px; /* Slight increase in height for better alignment */
+      padding: 8px 10px; /* Adjust inner padding for text spacing */
+      font-size: 16px; /* Match font size */
+      line-height: normal; /* Reset to prevent clipping */
+      border: 1px solid #ccc; /* Subtle border */
+      border-radius: 5px; /* Rounded corners */
+      box-sizing: border-box; /* Include padding in width/height calculations */
+      margin-bottom: 10px; /* Reduced margin between fields */
+      background-color: #fff; /* Match modal background */
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #e65f00; /* Accent color on focus */
+      box-shadow: 0 0 5px rgba(230, 95, 0, 0.3); /* Subtle focus glow */
+    }
+
+    select::-ms-expand {
+      display: none; /* Hide default dropdown arrow for IE/Edge */
+    }
+
+    select option {
+      padding: 5px 0; /* Ensure proper vertical alignment for options */
+    }
+
+    .form-group {
+      display: flex; /* Flexbox for alignment */
+      flex-direction: column;
+      align-items: stretch;
+      margin-bottom: 10px; /* Reduced spacing between fields */
+    }
+  }
+
+  .modal-footer {
+    text-align: center; /* Center-align buttons */
+    padding: 10px 0; /* Reduced footer padding */
+
+    .btn {
+      background-color: #e65f00; /* Match the accent color */
+      color: #fff; /* White text */
+      font-size: 16px; /* Slightly larger buttons */
+      padding: 8px 15px; /* Reduced padding for buttons */
+      border-radius: 5px; /* Smooth rounded corners */
+      border: none; /* Remove default borders */
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: darken(#e65f00, 10%); /* Slightly darker on hover */
+      }
+    }
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #rsvp-modal .modal-dialog {
+    max-width: 95%; /* Adjust width for smaller screens */
+    padding: 10px; /* Reduce padding */
+  }
+
+  #rsvp-modal .modal-content {
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+
+  #rsvp-modal .modal-header {
+    padding: 8px 10px; /* Reduced header padding */
+  }
+
+  #rsvp-modal .modal-footer {
+    padding: 8px 0; /* Adjust footer padding */
+  }
+}
+
+/* Browser-Specific Fixes */
+@supports (-webkit-appearance: none) {
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+}
+
 
 /* ==========================================================================
 Footer

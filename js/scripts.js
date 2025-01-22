@@ -234,16 +234,36 @@ $(document).ready(function () {
     //     }
     // });
 
+    $('#input-form').on('submit', function (e) {
+        e.preventDefault();
+        if ($('#inviteCode').val() == '42069' ) {
+            $('#input-form, #input-text').slideUp();
+            $('#video-bg').addClass('visible');
+            // Trigger a resize after showing the section to recalculate dimensions
+            setTimeout(() => {
+                $(window).trigger('resize');
+            }, 300); // Delay ensures the element is fully visible before recalculating layout
+            $('#nav-bar, #nav-icon, #map, #intro, #events, #day-events, #eng-pics, #rsvp').show();
+        } else if ($('#inviteCode').val() == '220309'){
+            $('#input-form, #input-text').slideUp();
+            $('#video-bg').addClass('visible');
+            // Trigger a resize after showing the section to recalculate dimensions
+            setTimeout(() => {
+                $(window).trigger('resize');
+            }, 300); // Delay ensures the element is fully visible before recalculating layout
+            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #rsvp').show();
+        } else {
+            $('#alert-wrapper1').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+            return;
+        }
+
+    });
+
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
         
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Checking your details.'));
+        $('#alert-wrapper2').html(alert_markup('info', '<strong>Just a sec!</strong> Checking your details.'));
         
-        // Validate the invite code
-        if ($('#inviteCode').val() !== '42069') {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
-            return;
-        }
         let getGuestJSON =  {
             action: "getGuestDetails",
             guestName: $('#guestName').val(),

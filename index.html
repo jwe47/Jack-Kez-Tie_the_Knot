@@ -70,7 +70,7 @@
         <header>
             <div class="header-content">
                 <div class="logo"><a href="#"><img src="img/logo.png" alt="Logo"></a></div>
-                <div class="header-nav">
+                <div class="header-nav" id="nav-bar" style="display:none;">
                     <nav>
                         <ul class="primary-nav">
                             <li><a href="#map">Location</a></li>
@@ -83,7 +83,7 @@
                         </ul>
                     </nav>
                 </div>
-                <div class="navicon">
+                <div class="navicon"  id="nav-icon" style="display:none;">
                     <a class="nav-toggle" href="#"><span></span></a>
                 </div>
             </div>
@@ -101,16 +101,43 @@
     <div class="down-arrow floating-arrow"><a href="#invitation"><i class="fa fa-angle-down"></i></a></div>
 </section>
 
-<section id="invitation" class="section-padding">
+
+<section class="rsvp text-center" id="code-input">
     <div class="container">
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-6 col-md-offset-3">
                 <h3>We are getting Married!</h3>
+                <p id="input-text">Please input your invite code below</p>
+                
+                <!-- Main RSVP Form -->
+                <form id="input-form" class="rsvp-form" action="" method="POST">
+                                        
+                    <!-- Invite Code -->
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12">
+                            <div class="form-input-group">
+                                <i class="fa fa-key"></i>
+                                <input type="number" name="inviteCode" id="inviteCode" class="" min="0" placeholder="Invite code" required>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Alert Section -->
+                    <div class="row">
+                        <div class="col-md-12" id="alert-wrapper1"></div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <button class="btn-fill rsvp-btn">
+                        Submit
+                    </button>
+                </form>
             </div>
         </div>
     </div>
 </section>
-<section id="video-bg" class="hidden-xs">
+
+<section id="video-bg" aria-hidden="true">
     <div id="bgndVideo" class="player"
          data-property="{videoURL:'https://youtu.be/rcWqBSlXJSY?si=tcAMMh0khk2bNxJ4',containment:'#video-bg',autoPlay:true, mute:true, showControls:false, startAt:0, stopAt:79, opacity:1}">
     </div>
@@ -120,7 +147,7 @@
     </div>
 </section>
 
-<section id="map" class="section-padding">
+<section id="map" class="section-padding" style="display:none;">
     <div class="text-center">
         <h3>Where is the venue?</h3>
     </div>
@@ -152,7 +179,7 @@
     </div>
 </section>
 
-<section id="intro">
+<section id="intro" style="display:none;">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -173,95 +200,76 @@
             <div class="col-md-3 hidden-sm hidden-xs"><img src="img/DSD_0214.jpg" class="wp2"></div>
         </div>
         <div class="row">
-            <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/IMG_2317.jpg" class="wp8"></div>
             <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/DSD_0214.jpg" class="wp9"></div>
         </div>
     </div>
 </section>
 
-<section class="events section-padding" id="events">
-    <div class="container">
+<section class="events section-padding" id="events" style="display:none;">
+    <div class="container"  id="day-events" style="display:none;">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <h3 class="header">Order of Service</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <div class="wp5">
+            <h5>Arrival Drinks</h5><span class="time">12:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Ceremony</h5><span class="time">13:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Drinks & Canapés</h5><span class="time">14:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Call to Dinner</h5><span class="time">16:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Speeches</h5><span class="time">16:15</span>
+          </div>
+          <div class="wp5">
+            <h5>Meal</h5><span class="time">17:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Cake Cutting</h5><span class="time">19:45</span>
+          </div>
+          <div class="wp5">
+            <h5>First Dance</h5><span class="time">20:00</span>
+          </div>
+          <div class="wp5">
+            <h5>Morning Rolls</h5><span class="time">21:00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container"  id="night-events" style="display:none;">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-center">
                 <h3 class="header">Order of Service</h3>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="wp3">
-                    <h5>Arrival Drinks<span class="time">12:30PM - 1:30PM</span></h5>
+            <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                <div class="wp5">
+                    <h5>Arrival</h5><span class="time">19:00</span>
                 </div>
                 <div class="wp5">
-                    <h5>Ceremony<span class="time">1:30PM - 2:30PM</span></h5>
+                    <h5>Cake Cutting</h5><span class="time">19:45</span>
                 </div>
                 <div class="wp5">
-                    <h5>Blashfhef<span class="time">2:30PM - 3:30PM</span></h5>
+                    <h5>First Dance</h5><span class="time">20:00</span>
                 </div>
                 <div class="wp5">
-                    <h5>fqefq<span class="time">3:30PM - 4:30PM</span></h5>
+                    <h5>Morning Rolls</h5><span class="time">21:00</span>
                 </div>
             </div>
         </div>
-        <div class="row section-padding">
-            <div class="col-md-4 col-md-offset-4 text-center">
-                <a class="btn btn-accent btn-small" data-toggle="modal" data-target="#dc-modal">
-                    <i class="fa fa-barcode"></i>&nbsp;&nbsp;Dress code
-                </a>
-            </div>
-        </div>
-        <!--<div class="row">
-            <div class="col-xs-12 section-border section-padding">
-            </div>
-        </div>-->
     </div>
-
-    <div id="dc-modal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span>&times;</span>
-                    </button>
-                    <h3 class="text-center section-padding">Ugh... dress codes?</h3>
-                    <h5>Mehndi <span class="time">1PM - 5PM</span></h5>
-                    <p>
-                        <strong>Ethnic indian wear</strong>
-                        <br>
-                        Ladies can wear something
-                        <a href="https://www.pinterest.com/ramswarooppatra/mehndi-dress-for-women/">bright & vivid</a>
-                        and gentlemen can be on
-                        their <a href="https://www.pinterest.com/ramswarooppatra/mehndi-dress-for-men/">vibrant
-                        kurtas</a> with pants or pyjamas along with an optional shawl.
-                    </p>
-                    <h5>Cocktail Night <span class="time">7PM - 12AM</span></h5>
-                    <p>
-                        <strong>Western attire</strong>
-                        <br>
-                        A semi-formal look that is contemporary & fashionable which is not too prim & proper is the best
-                        to pull off this night. You can see some pins for
-                        <a href="https://www.pinterest.com/ramswarooppatra/cocktail-night-outfit-for-women/">ladies</a>
-                        & <a href="https://www.pinterest.com/ramswarooppatra/cocktail-night-outfit-for-men/">gents</a>.
-                    </p>
-                    <h5>Wedding <span class="time">6PM-12AM</span></h5>
-                    <p>
-                        <strong>Indo-western</strong>
-                        <br>
-                        Ladies can flaunt their unconventional sarees,
-                        <a href="https://www.pinterest.com/ramswarooppatra/indo-western-lehengas/">lehengas</a>,
-                        <a href="https://www.pinterest.com/ramswarooppatra/indo-western-anarkalis/">anarkalis</a>,
-                        dresses and the list
-                        goes on whereas gentlemen can wear any kind of suit or just blazer. If you don't like to wear a
-                        suit/blazer, you can do a <a
-                            href="https://www.pinterest.com/ramswarooppatra/high-neck-jackets-for-men/">high-neck
-                        (band gala) waistcoat & shirt</a> combo.
-                    </p>
-                </div>
-            </div><!-- /.modal-content -->
-        </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
-
 </section>
 
-<section id="eng-pics" class="section-padding">
+<section id="eng-pics" class="section-padding" style="display:none;">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 text-center">
@@ -309,36 +317,13 @@
                     </div>
                 </a>
             </div>
-            <div class="col-md-2">
-                <a class="fancybox" rel="group" href="img/eng_pics/IMG_1.jpg">
-                    <div class="img-wrap">
-                        <div class="overlay">
-                            <i class="fa fa-search"></i>
-                        </div>
-                        <img src="img/eng_pics/IMG_1.jpg" alt=""/>
-                    </div>
-                </a>
-            </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row hidden-lg hidden-md hidden-xs">
-            <div class="col-xs-12 section-border section-padding"></div>
-        </div>
-    </div>
-    <!--<div class="row">
-        <div class="col-md-12">
-            <div class="diamond floating-logo">
-                <img src="img/sketch-logo.png" alt="Sketch Logo">
-                <div class="ring"></div>
-            </div>
-        </div>
-    </div>-->
 </section>
 
 
 
-<section class="rsvp text-center" id="rsvp">
+<section class="rsvp text-center" id="rsvp" style="display:none;">
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
@@ -357,19 +342,9 @@
                         </div>
                     </div>
                     
-                    <!-- Invite Code -->
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-input-group">
-                                <i class="fa fa-key"></i>
-                                <input type="number" name="inviteCode" id="inviteCode" class="" min="0" placeholder="Invite code" required>
-                            </div>
-                        </div>
-                    </div>
-                    
                     <!-- Alert Section -->
                     <div class="row">
-                        <div class="col-md-12" id="alert-wrapper"></div>
+                        <div class="col-md-12" id="alert-wrapper2"></div>
                     </div>
                     
                     <!-- Submit Button -->
