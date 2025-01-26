@@ -233,7 +233,9 @@ $(document).ready(function () {
     //             });
     //     }
     // });
+    var GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec';
 
+    // Handle the form submission for the invite code
     $('#input-form').on('submit', function (e) {
         e.preventDefault();
         if ($('#inviteCode').val() == '42069' ) {
@@ -251,7 +253,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(window).trigger('resize');
             }, 300); // Delay ensures the element is fully visible before recalculating layout
-            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #rsvp').show();
+            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #evening-rsvp').show();
         } else {
             $('#alert-wrapper1').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
             return;
@@ -271,7 +273,7 @@ $(document).ready(function () {
         };
     
         // Send the POST request to the Google Apps Script Web App URL
-        $.post('https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec', getGuestJSON)
+        $.post(GOOGLE_API_URL, getGuestJSON)
         .done(function (response) {
             if (response.result === "error" && response.message === "Guest not found") {
                 $('#alert-wrapper').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
@@ -308,7 +310,13 @@ $(document).ready(function () {
     // Handle final RSVP submission within the modal
     $('#final-rsvp-form').on('submit', function (e) {
         e.preventDefault();
-        
+        // Find the submit button
+        var submitButton = $(this).find('button[type="submit"]');
+
+        // Lock the button and replace with spinner
+        submitButton.prop('disabled', true); // Disable the button
+        submitButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...');
+             
         var rsvpData = $(this).serializeArray();  // Serialize the form data into an array of key/value pairs
         var rsvpObject = {}; // Empty object to store form data
     
@@ -317,32 +325,65 @@ $(document).ready(function () {
             rsvpObject[field.name] = field.value;
         });
         
-        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
+        $('#alert-wrapper3').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
         
         // Save the RSVP details
-        $.post('https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec', {
+        $.post(GOOGLE_API_URL, {
             action: 'saveRSVP',
             ...rsvpObject  // Use the object to spread the data
         })
         .done(function (response) {
             if (response.result === "error") {
-                $('#alert-wrapper').html(alert_markup('danger', response.message));
+                $('#alert-wrapper3').html(alert_markup('danger', response.message));
             } else {
-                $('#alert-wrapper').html(alert_markup('success', '<strong>Thank you!</strong> Your RSVP has been saved.'));
+                $('#alert-wrapper2').html(alert_markup('success', '<strong>Thank you!</strong> Your RSVP has been saved.'));
                 $('#rsvp-modal').modal('hide');  // Hide the RSVP modal after successful submission
-                
-                // Show the "Thank you" message
-                $('#rsvp-modal .modal-body').html(`
-                    <div class="section-padding">
-                        <h3>Thank you!</h3>
-                        <p>We cannot wait to see you on our big day.</p>
-                    </div>
-                `);
-                $('#rsvp-modal').modal('show');  // Reopen the modal to show the final message
             }
         })
         .fail(function () {
-            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There was an issue saving your RSVP. Please reach out to Ben or Lucy.'));
+            submitButton.prop('disabled', false);
+            submitButton.html('Submit');
+            $('#alert-wrapper3').html(alert_markup('danger', '<strong>Sorry!</strong> There was an issue saving your RSVP. Please reach out to Ben or Lucy.'));
+        });
+    });
+
+    $('#evening-form').on('submit', function (e) {
+        e.preventDefault();
+        // Find the submit button
+        var submitButton = $(this).find('button[type="evening-submit"]');
+        $('#hiddenGuestAttendance').val('yes - evening');
+
+        // Lock the button and replace with spinner
+        submitButton.prop('disabled', true); // Disable the button
+        submitButton.html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...');
+             
+        var rsvpData = $(this).serializeArray();  // Serialize the form data into an array of key/value pairs
+        var rsvpObject = {}; // Empty object to store form data
+    
+        // Convert serialized array into an object
+        rsvpData.forEach(function (field) {
+            rsvpObject[field.name] = field.value;
+        });
+        
+        $('#alert-wrapper-evening').html(alert_markup('info', '<strong>Just a sec!</strong> Saving your RSVP details.'));
+        
+        // Save the RSVP details
+        $.post(GOOGLE_API_URL, {
+            action: 'saveRSVP',
+            ...rsvpObject  // Use the object to spread the data
+        })
+        .done(function (response) {
+            if (response.result === "error") {
+                $('#alert-wrapper-evening').html(alert_markup('danger', response.message));
+            } else {
+                $('#alert-wrapper-evening').html(alert_markup('success', '<strong>Thank you!</strong> Your RSVP has been saved.'));
+                submitButton.html('Done!');
+            }
+        })
+        .fail(function () {
+            submitButton.prop('disabled', false);
+            submitButton.html('Submit');
+            $('#alert-wrapper-evening').html(alert_markup('danger', '<strong>Sorry!</strong> There was an issue saving your RSVP. Please reach out to Ben or Lucy.'));
         });
     });
     

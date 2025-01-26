@@ -1037,6 +1037,37 @@ RSVP Pop-up
   }
 }
 
+.spinner-border {
+  display: inline-block;
+  width: 1rem; /* Adjust the size as needed */
+  height: 1rem;
+  vertical-align: middle; /* Align vertically within the button */
+  border: 0.15em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spinner-border 0.75s linear infinite;
+}
+
+.spinner-border-sm {
+  width: 0.8rem; /* Smaller size for small buttons */
+  height: 0.8rem;
+  border-width: 0.1em;
+}
+
+/* Centering spinner and text within the button */
+button:disabled {
+  display: inline-flex; /* Enable flexbox */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  gap: 0.5rem; /* Add spacing between spinner and text */
+}
+
+/* Spinner animation */
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg);
+  }
+}
 
 /* ==========================================================================
 Footer
