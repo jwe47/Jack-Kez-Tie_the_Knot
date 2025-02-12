@@ -824,6 +824,73 @@ Google map
 }
 
 /* ==========================================================================
+FAQ Section
+========================================================================== */
+.faq-section {
+  padding: 60px 0;
+}
+.faq-item {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+}
+.faq-item h4 {
+  font-weight: bold;
+  color: #ff4fa7;
+  padding-right: 200px;
+}
+
+.faq-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease, visibility 0s ease 0.5s;
+}
+
+.faq-content.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+/* Style the FAQ toggle button */
+.faq-toggle-btn {
+  color: $h3-color;
+  font-size: $font-size-h4;
+  font-weight: $bold;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  line-height: $base-line-height;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ensure the icon inside the button is visible */
+.faq-toggle-btn .toggle-icon {
+  font-size: 18px;
+  transition: transform 0.3s ease;
+}
+
+/* When the FAQ section is open, rotate the icon */
+.faq-toggle-btn.active .toggle-icon {
+  transform: rotate(180deg);
+}
+
+.faq-divider {
+  border: none;
+  height: 1px;
+  background: $keyline-color; /* Adjust color to match existing dividers */
+  margin: 40px auto;
+  width: 90%; /* Adjust width if needed */
+}
+
+
+
+/* ==========================================================================
 RSVP form
 ========================================================================== */
 .rsvp {

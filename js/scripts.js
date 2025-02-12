@@ -162,7 +162,17 @@ $(document).ready(function () {
     }
 
     /********************** Embed youtube video *********************/
-    $('.player').YTPlayer();
+    $(".player").YTPlayer({
+        mute: true,  
+        autoPlay: true,
+        useOnMobile: true,  // Allows video to attempt playback on mobile
+        mobileFallbackImage: "img/video_fallback.jpg",  // Show an image if video fails
+        containment: "body",
+        showControls: false,
+        opacity: 1
+    });
+    
+    
 
 
     /********************** Toggle Map Content **********************/
@@ -206,6 +216,16 @@ $(document).ready(function () {
 
     $('#add-to-cal').html(myCalendar);
 
+    /**********************  FAQ  **********************/
+    $(document).ready(function() {
+        $('#faq-content').hide();  // Hide FAQ content initially
+    });
+    
+    $('.faq-toggle-btn').click(function () {
+        $(this).toggleClass('active');  // Toggle the button's active state
+        $('#faq-content').slideToggle(300);  // Smooth slide toggle for the FAQ section
+    });
+    
 
     /********************** RSVP **********************/
     // $('#rsvp-forme').on('submit', function (e) {
@@ -233,7 +253,7 @@ $(document).ready(function () {
     //             });
     //     }
     // });
-    var GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbx6MDzX_oUWotU7_1NWwrqL1uut--CTxVtAGxlTW5qG33wjyTtnl3IkbXd5MTeNw9E1/exec';
+    var GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwakcs7hX-BRsQWSavzpKNPL40K8MPZubLt6hcNsN_te-0R70rMj78HftPbv26zCSkP-A/exec';
 
     // Handle the form submission for the invite code
     $('#input-form').on('submit', function (e) {
@@ -245,7 +265,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(window).trigger('resize');
             }, 300); // Delay ensures the element is fully visible before recalculating layout
-            $('#nav-bar, #nav-icon, #map, #intro, #events, #day-events, #eng-pics, #rsvp').show();
+            $('#nav-bar, #nav-icon, #map, #intro, #events, #day-events,#menu, #eng-pics, #prezola, #faq, #faq-day, #rsvp').show();
         } else if ($('#inviteCode').val() == '220309'){
             $('#input-form, #input-text').slideUp();
             $('#video-bg').addClass('visible');
@@ -253,13 +273,49 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(window).trigger('resize');
             }, 300); // Delay ensures the element is fully visible before recalculating layout
-            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #evening-rsvp').show();
+            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #prezola, #faq, #faq-night, #evening-rsvp').show();
         } else {
             $('#alert-wrapper1').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
             return;
         }
 
     });
+
+    $(document).ready(function () {
+        // Get elements
+        const guestAttendance = $('select[name="guestAttendance"]');
+        const guestDrink = $('select[name="guestDrink"]');
+        const plusAttendance = $('select[name="plusAttendance"]');
+        const plusDrink = $('select[name="plusDrink"]');
+    
+        // Function to toggle required attribute
+        function toggleRequired(attendanceField, drinkField) {
+            if (attendanceField.val() === "yes") {
+                drinkField.attr("required", "required");
+            } else {
+                drinkField.removeAttr("required");
+            }
+        }
+    
+        // Event listener for guest attendance
+        guestAttendance.on("change", function () {
+            toggleRequired(guestAttendance, guestDrink);
+        });
+    
+        // Event listener for plus one's attendance (if applicable)
+        if (plusAttendance.length) {
+            plusAttendance.on("change", function () {
+                toggleRequired(plusAttendance, plusDrink);
+            });
+        }
+    
+        // Run once on page load to set the initial state
+        toggleRequired(guestAttendance, guestDrink);
+        if (plusAttendance.length) {
+            toggleRequired(plusAttendance, plusDrink);
+        }
+    });
+    
 
     $('#rsvp-form').on('submit', function (e) {
         e.preventDefault();
@@ -276,10 +332,10 @@ $(document).ready(function () {
         $.post(GOOGLE_API_URL, getGuestJSON)
         .done(function (response) {
             if (response.result === "error" && response.message === "Guest not found") {
-                $('#alert-wrapper').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
+                $('#alert-wrapper2').html(alert_markup('danger', 'We can\'t seem to find you on the guest list! Please reach out to Ben or Lucy if you think this is a mistake.'));
             } else if (response.result === "error") {
                 // Handle other errors (like incorrect invite code)
-                $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> ' + response.message));
+                $('#alert-wrapper2').html(alert_markup('danger', '<strong>Sorry!</strong> ' + response.message));
             } else {
                 console.log(response);
                 console.log(response.hasPlusOne);
@@ -291,7 +347,7 @@ $(document).ready(function () {
                     $('#plusOneDetails').show();
                     $('#plusOneNameDisplay').text(response.plusOneName || 'your plus one');
                     $('.plusOneNameDisplay').text(response.plusOneName || 'your plus one');
-                    var plusOneFullName = response.plusOneFullName || 'plus one';
+                    var plusOneFullName = response.plusOneFullName || response.plusOneName || 'plus one';
                     $('#hiddenPlusOneFullName').val(plusOneFullName);
                 } else {
                     $('#plusOneDetails').hide();
