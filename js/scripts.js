@@ -187,15 +187,15 @@ $(document).ready(function () {
 
     /**********************  Menu  **********************/
      // When the modal opens
-     $('#dc-modal').on('shown.bs.modal', function () {
+    $('#dc-modal').on('shown.bs.modal', function () {
         // Lock the body scroll
-        $('body').addClass('modal-open');
+        $('body').css('overflow', 'hidden !important');
     });
 
     // When the modal closes
     $('#dc-modal').on('hidden.bs.modal', function () {
         // Unlock the body scroll
-        $('body').removeClass('modal-open');
+        $('body').css('overflow', '');
     });
 
     
@@ -238,15 +238,8 @@ $(document).ready(function () {
     //     }
     // });
     var GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwakcs7hX-BRsQWSavzpKNPL40K8MPZubLt6hcNsN_te-0R70rMj78HftPbv26zCSkP-A/exec';
-    // Lock scroll when modal is open
-    $('#rsvp-modal').on('shown.bs.modal', function () {
-        $('body').addClass('modal-open');
-    });
 
-    // Unlock scroll when modal is closed
-    $('#rsvp-modal').on('hidden.bs.modal', function () {
-        $('body').removeClass('modal-open');
-    });
+
     // Handle the form submission for the invite code
     $('#input-form').on('submit', function (e) {
         e.preventDefault();
