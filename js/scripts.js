@@ -207,7 +207,6 @@ $(document).ready(function () {
     
     $('.faq-toggle-btn').click(function () {
         $(this).toggleClass('active');  // Toggle the button's active state
-        $('#faq-divider').toggle();
         $('#faq-content').slideToggle(300);  // Smooth slide toggle for the FAQ section
     });
     
