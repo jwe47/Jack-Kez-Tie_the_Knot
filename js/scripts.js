@@ -185,37 +185,21 @@ $(document).ready(function () {
         $('#btn-show-content').toggleClass('toggle-map-content');
     });
 
-    /********************** Add to Calendar **********************/
-    var myCalendar = createCalendar({
-        options: {
-            class: '',
-            // You can pass an ID. If you don't, one will be generated for you
-            id: ''
-        },
-        data: {
-            // Event title
-            title: "Ben and Lucy's Wedding",
-
-            // Event start date
-            start: new Date('Jun 07, 2025 12:00'),
-
-            // Event duration (IN MINUTES)
-            // duration: 120,
-
-            // You can also choose to set an end time
-            // If an end time is set, this will take precedence over duration
-            end: new Date('Jun 08, 2025 00:00'),
-
-            // Event Address
-            address: 'The Engine Works, Glasgow, G20 9AE',
-
-            // Event Description
-            description: "We can't wait to see you on our big day. For any queries or issues, please contact Ben at +44 7880704807."
-        }
+    /**********************  Menu  **********************/
+     // When the modal opens
+     $('#dc-modal').on('shown.bs.modal', function () {
+        // Lock the body scroll
+        $('body').addClass('modal-open');
     });
 
-    $('#add-to-cal').html(myCalendar);
+    // When the modal closes
+    $('#dc-modal').on('hidden.bs.modal', function () {
+        // Unlock the body scroll
+        $('body').removeClass('modal-open');
+    });
 
+    
+    
     /**********************  FAQ  **********************/
     $(document).ready(function() {
         $('#faq-content').hide();  // Hide FAQ content initially
@@ -254,7 +238,15 @@ $(document).ready(function () {
     //     }
     // });
     var GOOGLE_API_URL = 'https://script.google.com/macros/s/AKfycbwakcs7hX-BRsQWSavzpKNPL40K8MPZubLt6hcNsN_te-0R70rMj78HftPbv26zCSkP-A/exec';
+    // Lock scroll when modal is open
+    $('#rsvp-modal').on('shown.bs.modal', function () {
+        $('body').addClass('modal-open');
+    });
 
+    // Unlock scroll when modal is closed
+    $('#rsvp-modal').on('hidden.bs.modal', function () {
+        $('body').removeClass('modal-open');
+    });
     // Handle the form submission for the invite code
     $('#input-form').on('submit', function (e) {
         e.preventDefault();
@@ -265,7 +257,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(window).trigger('resize');
             }, 300); // Delay ensures the element is fully visible before recalculating layout
-            $('#nav-bar, #nav-icon, #map, #intro, #events, #day-events,#menu, #eng-pics, #prezola, #faq, #faq-day, #rsvp').show();
+            $('#nav-bar, #menu-day, #nav-icon, #map, #intro, #events, #day-events, #menu, #eng-pics, #prezola, #faq, #faq-day, #rsvp').show();
         } else if ($('#inviteCode').val() == '220309'){
             $('#input-form, #input-text').slideUp();
             $('#video-bg').addClass('visible');
@@ -273,7 +265,7 @@ $(document).ready(function () {
             setTimeout(() => {
                 $(window).trigger('resize');
             }, 300); // Delay ensures the element is fully visible before recalculating layout
-            $('#nav-bar, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #prezola, #faq, #faq-night, #evening-rsvp').show();
+            $('#nav-bar, #menu-evening, #nav-icon, #map, #intro, #events, #night-events, #eng-pics, #prezola, #faq, #faq-night, #evening-rsvp').show();
         } else {
             $('#alert-wrapper1').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
             return;
