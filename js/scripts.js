@@ -266,10 +266,10 @@ $(document).ready(function () {
 
     });
 
-        const guestAttendance = $('select[name="guestAttendance"]');
-        const guestDrink = $('select[name="guestDrink"]');
-        const plusAttendance = $('select[name="plusAttendance"]');
-        const plusDrink = $('select[name="plusDrink"]');
+    const guestAttendance = $('select[name="guestAttendance"]');
+    const guestDrink = $('select[name="guestDrink"]');
+    const plusAttendance = $('select[name="plusAttendance"]');
+    const plusDrink = $('select[name="plusDrink"]');
     
     // Function to toggle required attribute
     function toggleRequired(attendanceField, drinkField) {
