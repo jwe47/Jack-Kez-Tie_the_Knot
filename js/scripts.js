@@ -266,40 +266,37 @@ $(document).ready(function () {
 
     });
 
-    $(document).ready(function () {
-        // Get elements
         const guestAttendance = $('select[name="guestAttendance"]');
         const guestDrink = $('select[name="guestDrink"]');
         const plusAttendance = $('select[name="plusAttendance"]');
         const plusDrink = $('select[name="plusDrink"]');
     
-        // Function to toggle required attribute
-        function toggleRequired(attendanceField, drinkField) {
-            if (attendanceField.val() === "yes") {
-                drinkField.attr("required", "required");
-            } else {
+    // Function to toggle required attribute
+    function toggleRequired(attendanceField, drinkField) {
+        if (attendanceField.val() === "yes") {
+            drinkField.attr("required", "required");
+        } else {
                 drinkField.removeAttr("required");
-            }
         }
+    }
     
-        // Event listener for guest attendance
-        guestAttendance.on("change", function () {
-            toggleRequired(guestAttendance, guestDrink);
+    // Event listener for guest attendance
+    guestAttendance.on("change", function () {
+        toggleRequired(guestAttendance, guestDrink);
+    });
+    
+    // Event listener for plus one's attendance (if applicable)
+    if (plusAttendance.length) {
+        plusAttendance.on("change", function () {
+            toggleRequired(plusAttendance, plusDrink);
         });
-    
-        // Event listener for plus one's attendance (if applicable)
-        if (plusAttendance.length) {
-            plusAttendance.on("change", function () {
-                toggleRequired(plusAttendance, plusDrink);
-            });
-        }
+    }
     
         // Run once on page load to set the initial state
         toggleRequired(guestAttendance, guestDrink);
         if (plusAttendance.length) {
-            toggleRequired(plusAttendance, plusDrink);
-        }
-    });
+        toggleRequired(plusAttendance, plusDrink);
+    }
     
 
     $('#rsvp-form').on('submit', function (e) {
@@ -334,6 +331,7 @@ $(document).ready(function () {
                     $('.plusOneNameDisplay').text(response.plusOneName || 'your plus one');
                     var plusOneFullName = response.plusOneFullName || response.plusOneName || 'plus one';
                     $('#hiddenPlusOneFullName').val(plusOneFullName);
+                    plusAttendance.attr("required", "required");
                 } else {
                     $('#plusOneDetails').hide();
                 }
